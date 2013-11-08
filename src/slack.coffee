@@ -21,7 +21,10 @@ class Slack extends Adapter
 
     strings.forEach (str) =>
       @log str
-      str = @escapeHtml str
+      try
+        str = @escapeHtml str
+      catch e
+        @logError e
       args = JSON.stringify
         username : @robot.name
         channel  : user.reply_to
